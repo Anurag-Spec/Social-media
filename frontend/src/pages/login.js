@@ -14,7 +14,11 @@ function Login() {
   useEffect(() => {
     document.title = "Login - TwinGram";
   }, []);
-  return <div>Login Page</div>;
+  return (
+    <div className="container flex mx-auto max-w-screen-md items-center h-screen ">
+      Login
+    </div>
+  );
 }
 
 export default Login;
