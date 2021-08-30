@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
 
 function Login() {
@@ -50,7 +50,7 @@ function Login() {
             <button
               disabled={isInvalid}
               type="submit"
-              className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${
+              className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${
                 isInvalid && "opacity-50"
               }`}
             >
@@ -60,6 +60,9 @@ function Login() {
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 border border-gray-primary">
           <p className="text-sm">Don't have an account?{``}</p>
+          <Link to="/signup" className="font-bold text-blue-medium">
+            Sign up
+          </Link>
         </div>
       </div>
     </div>
