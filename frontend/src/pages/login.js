@@ -10,6 +10,7 @@ function Login() {
   const history = useHistory();
   const isInvalid = password === "" || emailAddress === "";
   const { firebase } = useContext(FirebaseContext);
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -49,14 +50,16 @@ function Login() {
               aria-label="Enter your email address"
               placeholder="email address"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-              onChange={(target) => setEmailAddress(target)}
+              onChange={({ target }) => setEmailAddress(target.value)}
+              value={emailAddress}
             />
             <input
               type="password"
               aria-label="Enter your password"
               placeholder="password"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-              onChange={(target) => setPassword(target)}
+              onChange={({ target }) => setPassword(target.value)}
+              value={password}
             />
             <button
               disabled={isInvalid}
