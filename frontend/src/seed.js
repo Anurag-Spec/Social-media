@@ -1,47 +1,49 @@
 export function seedDatabase(firebase) {
   const users = [
     {
-      userId: "NDJTOPoAelh1OnkiSTjaPuU7e6G3",
-      username: "Anurag",
-      fullName: "Anurag Rathod",
-      emailAddress: "anuragrathod@gmail.com",
+      userId: "hja1WMn1t5beKdwfmLqKDtwRS9O2",
+      username: "karl",
+      fullName: "Karl Hadwen",
+      emailAddress: "karlhadwen@gmail.com",
       following: ["2"],
       followers: ["2", "3", "4"],
       dateCreated: Date.now(),
     },
     {
       userId: "2",
-      username: "Sagar",
-      fullName: "Sagar Dhamani",
-      emailAddress: "sagardhamani@gmail.com",
+      username: "raphael",
+      fullName: "Raffaello Sanzio da Urbino",
+      emailAddress: "raphael@sanzio.com",
       following: [],
-      followers: ["NDJTOPoAelh1OnkiSTjaPuU7e6G3"],
+      followers: ["hja1WMn1t5beKdwfmLqKDtwRS9O2"],
       dateCreated: Date.now(),
     },
     {
       userId: "3",
-      username: "Ankit",
-      fullName: "Ankit Pawade",
-      emailAddress: "ankitpawade@gmail.com",
+      username: "dali",
+      fullName: "Salvador Dalí",
+      emailAddress: "salvador@dali.com",
       following: [],
-      followers: ["NDJTOPoAelh1OnkiSTjaPuU7e6G3"],
+      followers: ["hja1WMn1t5beKdwfmLqKDtwRS9O2"],
       dateCreated: Date.now(),
     },
     {
       userId: "4",
-      username: "Swapnil",
-      fullName: "Swapnil Zinjurde",
-      emailAddress: "swapnilzinjurde@gmail.com",
+      username: "orwell",
+      fullName: "George Orwell",
+      emailAddress: "george@orwell.com",
       following: [],
-      followers: ["NDJTOPoAelh1OnkiSTjaPuU7e6G3"],
+      followers: ["hja1WMn1t5beKdwfmLqKDtwRS9O2"],
       dateCreated: Date.now(),
     },
   ];
 
+  // eslint-disable-next-line prefer-const
   for (let k = 0; k < users.length; k++) {
     firebase.firestore().collection("users").add(users[k]);
   }
 
+  // eslint-disable-next-line prefer-const
   for (let i = 1; i <= 5; ++i) {
     firebase
       .firestore()
