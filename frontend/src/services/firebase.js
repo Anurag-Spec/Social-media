@@ -23,7 +23,6 @@ export async function getUserByUsername(username) {
   }));
 }
 
-// get user from the firestore where userId === userId (passed from the auth)
 export async function getUserByUserId(userId) {
   const result = await firebase
     .firestore()
@@ -56,9 +55,9 @@ export async function getSuggestedProfiles(userId, following) {
 }
 
 export async function updateLoggedInUserFollowing(
-  loggedInUserDocId, // currently logged in user document id (karl's profile)
-  profileId, // the user that karl requests to follow
-  isFollowingProfile // true/false (am i currently following this person?)
+  loggedInUserDocId,
+  profileId,
+  isFollowingProfile
 ) {
   return firebase
     .firestore()
@@ -72,9 +71,9 @@ export async function updateLoggedInUserFollowing(
 }
 
 export async function updateFollowedUserFollowers(
-  profileDocId, // currently logged in user document id (karl's profile)
-  loggedInUserDocId, // the user that karl requests to follow
-  isFollowingProfile // true/false (am i currently following this person?)
+  profileDocId,
+  loggedInUserDocId,
+  isFollowingProfile
 ) {
   return firebase
     .firestore()
@@ -88,7 +87,6 @@ export async function updateFollowedUserFollowers(
 }
 
 export async function getPhotos(userId, following) {
-  // [5,4,2] => following
   const result = await firebase
     .firestore()
     .collection("photos")
@@ -106,9 +104,7 @@ export async function getPhotos(userId, following) {
       if (photo.likes.includes(userId)) {
         userLikedPhoto = true;
       }
-      // photo.userId = 2
       const user = await getUserByUserId(photo.userId);
-      // raphael
       const { username } = user[0];
       return { username, ...photo, userLikedPhoto };
     })
