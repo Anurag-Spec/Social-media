@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
 
 function Login() {
   const [emailAddress, setEmailAddress] = useState("");
@@ -9,7 +10,17 @@ function Login() {
   const history = useHistory();
   const isInvalid = password === "" || emailAddress === "";
   const { firebase } = useContext(FirebaseContext);
-  const handleLogin = () => {};
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+      history.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      setEmailAddress("");
+      setPassword("");
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
     document.title = "Login - TwinGram";
