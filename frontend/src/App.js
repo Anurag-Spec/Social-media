@@ -11,6 +11,7 @@ const Login = lazy(() => import("./pages/login"));
 const SignUp = lazy(() => import("./pages/signup"));
 const Dashboard = lazy(() => import("./pages/dashboard"));
 const Profile = lazy(() => import("./pages/profile"));
+const AddPost = lazy(() => import("./pages/addPost"));
 const NotFound = lazy(() => import("./pages/not-found"));
 
 export default function App() {
@@ -26,6 +27,9 @@ export default function App() {
             <Route path={ROUTES.PROFILE} component={Profile} />
             <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
               <Dashboard />
+            </ProtectedRoute>
+            <ProtectedRoute user={user} path={ROUTES.ADDPOST} exact>
+              <AddPost />
             </ProtectedRoute>
             <Route component={NotFound} />
           </Switch>

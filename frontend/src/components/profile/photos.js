@@ -1,9 +1,20 @@
 import PropTypes from "prop-types";
 import Skeleton from "react-loading-skeleton";
+import { useHistory } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
 export default function Photos({ photos }) {
+  const history = useHistory();
   return (
     <div className="h-16 border-t border-gray-primary mt-12 pt-4">
+      <div className={"text-center mt-3 mb-3"}>
+        <button
+          onClick={() => history.push(ROUTES.ADDPOST)}
+          className={`bg-blue-medium text-white text-center py-1 px-2 rounded h-8 font-bold`}
+        >
+          Add Post
+        </button>
+      </div>
       <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
         {!photos
           ? new Array(12)
