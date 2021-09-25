@@ -39,7 +39,7 @@ function AddPost(user) {
   return (
     <div>
       <Header />
-      <div className="h-16 border-t border-gray-primary mt-12 pt-4">
+      <div className="h-16 border-t border-gray-primary mt-20 ml-8 w-auto pt-4 flex flex-row">
         <input
           onChange={({ target }) => setCaption(target.value)}
           value={caption}
@@ -48,7 +48,7 @@ function AddPost(user) {
         />
         <input type="file" onChange={handleChange} />
         <button
-          className={"bg-blue-medium text-white w-50 rounded h-8 font-bold"}
+          className={"bg-blue-medium text-white  p-2 m-2 rounded h-8 font-bold"}
           onClick={handleUpload}
         >
           Upload
