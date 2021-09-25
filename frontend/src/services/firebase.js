@@ -100,6 +100,10 @@ export async function uploadImageByUserId(userId, caption, url) {
   });
 }
 
+export async function deleteImageById(photoId) {
+  return firebase.firestore().collection("photos").doc(photoId).delete();
+}
+
 export async function getPhotos(userId, following) {
   const result = await firebase
     .firestore()
