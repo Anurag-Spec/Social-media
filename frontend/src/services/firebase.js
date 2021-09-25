@@ -86,6 +86,20 @@ export async function updateFollowedUserFollowers(
     });
 }
 
+export async function uploadImageByUserId(userId, caption, url) {
+  return firebase.firestore().collection("photos").add({
+    photoId: Date.now(),
+    userId: userId,
+    imageSrc: url,
+    caption: caption,
+    likes: [],
+    comments: [],
+    userLatitude: "40.7128°",
+    userLongitude: "74.0060°",
+    dateCreated: Date.now(),
+  });
+}
+
 export async function getPhotos(userId, following) {
   const result = await firebase
     .firestore()
@@ -134,7 +148,7 @@ export async function isUserFollowingProfile(
   const result = await firebase
     .firestore()
     .collection("users")
-    .where("username", "==", loggedInUserUsername) // karl (active logged in user)
+    .where("username", "==", loggedInUserUsername)
     .where("following", "array-contains", profileUserId)
     .get();
 
@@ -153,18 +167,12 @@ export async function toggleFollow(
   profileUserId,
   followingUserId
 ) {
-  // 1st param: karl's doc id
-  // 2nd param: raphael's user id
-  // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
   await updateLoggedInUserFollowing(
     activeUserDocId,
     profileUserId,
     isFollowingProfile
   );
 
-  // 1st param: karl's user id
-  // 2nd param: raphael's doc id
-  // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
   await updateFollowedUserFollowers(
     profileDocId,
     followingUserId,
