@@ -5,6 +5,7 @@ import UserContext from "../context/user";
 import * as ROUTES from "../constants/routes";
 import { DEFAULT_IMAGE_PATH } from "../constants/paths";
 import useUser from "../hooks/use-user";
+import image from "../images/Avatars/default.png";
 
 export default function Header() {
   const { user: loggedInUser } = useContext(UserContext);
@@ -82,11 +83,8 @@ export default function Header() {
                     <Link to={`/p/${user?.username}`}>
                       <img
                         className="rounded-full h-8 w-8 flex"
-                        src={`/images/avatars/${user?.username}.jpg`}
+                        src={image}
                         alt={`${user?.username} profile`}
-                        onError={(e) => {
-                          e.target.src = DEFAULT_IMAGE_PATH;
-                        }}
                       />
                     </Link>
                   </div>

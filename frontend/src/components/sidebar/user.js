@@ -14,7 +14,7 @@ export default function User({ username, fullName }) {
       <div className="flex items-center justify-between col-span-1">
         <img
           className="rounded-full w-16 flex mr-3"
-          src={`/images/avatars/${username}.jpg`}
+          src={`/images/Avatars/${username}.jpg`}
           alt=""
           onError={(e) => {
             e.target.src = DEFAULT_IMAGE_PATH;
