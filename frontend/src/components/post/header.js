@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import image1 from "../../images/Avatars/default.png";
 
 export default function Header({ username }) {
   return (
@@ -9,7 +10,7 @@ export default function Header({ username }) {
         <Link to={`/p/${username}`} className="flex items-center">
           <img
             className="rounded-full h-8 w-8 flex mr-3"
-            src={`/images/avatars/default.png`}
+            src={image1}
             alt={`${username} profile picture`}
           />
           <p className="font-bold">{username}</p>
