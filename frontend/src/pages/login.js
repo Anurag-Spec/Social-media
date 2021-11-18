@@ -23,8 +23,22 @@ function Login() {
     }
   };
 
+  const handleGuestLogin = async (event) => {
+    event.preventDefault();
+    try {
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword("guest@user.com", "123456");
+      history.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      setEmailAddress("");
+      setPassword("");
+      setError(error.message);
+    }
+  };
+
   useEffect(() => {
-    document.title = "Login - TwinGram";
+    document.title = "Login - InstaGram";
   }, []);
   return (
     <div className="container flex mx-auto max-w-screen-md items-center h-screen ">
@@ -76,6 +90,13 @@ function Login() {
           <p className="text-sm">Don't have an account?{``}</p>
           <Link to="/signup" className="font-bold text-blue-medium">
             Sign up
+          </Link>
+          <Link
+            to="/signup"
+            onClick={handleGuestLogin}
+            className="font-bold text-blue-medium"
+          >
+            Login as Guest
           </Link>
         </div>
       </div>
