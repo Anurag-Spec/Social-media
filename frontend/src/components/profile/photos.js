@@ -3,10 +3,14 @@ import Skeleton from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { deleteImageById } from "../../services/firebase";
+import UserContext from "../../context/user";
+import { useContext } from "react";
 
-export default function Photos({ photos }) {
+export default function Photos({ photos, user }) {
   const history = useHistory();
-
+  const userEmail = useContext(UserContext);
+  console.log(userEmail.user.email);
+  console.log(user, "user");
   const handleDelete = (photo) => {
     deleteImageById(photo.docId);
     history.push("/");
@@ -14,14 +18,16 @@ export default function Photos({ photos }) {
 
   return (
     <div className="h-16 border-t border-gray-primary mt-12 pt-4">
-      <div className={"text-center mt-3 mb-3"}>
-        <button
-          onClick={() => history.push(ROUTES.ADDPOST)}
-          className={`bg-blue-medium text-white text-center py-1 px-2 rounded h-8 font-bold`}
-        >
-          Add Post
-        </button>
-      </div>
+      {user.emailAddress === userEmail.user.email ? (
+        <div className={"text-center mt-3 mb-3"}>
+          <button
+            onClick={() => history.push(ROUTES.ADDPOST)}
+            className={`bg-blue-medium text-white text-center py-1 px-2 rounded h-8 font-bold`}
+          >
+            Add Post
+          </button>
+        </div>
+      ) : null}
       <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
         {!photos
           ? new Array(12)
@@ -30,15 +36,17 @@ export default function Photos({ photos }) {
           : photos.length > 0
           ? photos.map((photo) => (
               <div key={photo.docId}>
-                <button
-                  onClick={() => handleDelete(photo)}
-                  className="bg-blue-medium p-1 text-white m-2 rounded h-8 font-bold"
-                >
-                  Delete Post
-                </button>
-                <button className="bg-gray-primary p-1 text-white m-2 rounded h-8 font-bold">
-                  Edit
-                </button>
+                {user.emailAddress === userEmail.user.email ? (
+                  <div>
+                    <button
+                      onClick={() => handleDelete(photo)}
+                      className="bg-blue-medium p-1 text-white m-2 rounded h-8 font-bold"
+                    >
+                      Delete Post
+                    </button>
+                  </div>
+                ) : null}
+
                 <div className="relative group">
                   <img src={photo.imageSrc} alt={photo.caption} />
                   <div className="absolute bottom-0 left-0 bg-gray-200 z-10 w-full justify-evenly items-center h-full bg-black-faded group-hover:flex hidden">
@@ -90,4 +98,13 @@ export default function Photos({ photos }) {
 
 Photos.propTypes = {
   photos: PropTypes.array,
+  user: PropTypes.shape({
+    dateCreated: PropTypes.number,
+    emailAddress: PropTypes.string,
+    followers: PropTypes.array,
+    following: PropTypes.array,
+    fullName: PropTypes.string,
+    userId: PropTypes.string,
+    username: PropTypes.string,
+  }),
 };
