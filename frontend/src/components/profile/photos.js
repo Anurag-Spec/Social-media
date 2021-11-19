@@ -9,8 +9,6 @@ import { useContext } from "react";
 export default function Photos({ photos, user }) {
   const history = useHistory();
   const userEmail = useContext(UserContext);
-  console.log(userEmail.user.email);
-  console.log(user, "user");
   const handleDelete = (photo) => {
     deleteImageById(photo.docId);
     history.push("/");
